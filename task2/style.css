@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  background-image: url('img.avif'); /* Replace 'weather-background.jpg' with your actual image */
+  background-size: cover;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  color: #333;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#weatherInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
+background-color: transparent;
+color: white;
+font-size: larger;
+font-family: bold;
+}
+
+.weather-background {
+  background-image: url('img.jpg'); /* Replace 'weather-background.jpg' with your actual image */
+  background-size: cover;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
