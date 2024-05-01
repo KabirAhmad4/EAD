@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Api</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #searchInput {
+      padding: 8px;
+      width: 60%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    #searchButton {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #searchButton:hover {
+      background-color: #0056b3;
+    }
+
+    #results {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .video {
+      margin: 10px;
+      width: 300px;
+    }
+
+    .video img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .video h2 {
+      font-size: 16px;
+      margin-top: 0;
+    }
+  </style>
+
+<style> #video-search { display: flex; flex-direction: column; align-items: center; margin-top: 50px; } #searchInput { padding: 10px; font-size: 16px; width: 300px; margin-bottom: 20px; } button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; } #results { display: flex; flex-direction: column; align-items: center; width: 100%; } .video-result { display: flex; align-items: center; margin-bottom: 20px; } .video-title { font-size: 18px; margin-right: 20px; } .video-thumbnail { width: 200px; height: 120px; background-position: center; background-size: cover; margin-right: 20px; } </style> 
+<!-- <div id="video-search"> <input type="text" id="searchInput" placeholder="Search for videos"> <button onclick="searchVideos()">Search</button> <div id="results"></div> </div>  -->
+
+<script> // Replace this with your actual video search code const searchTerm = document.getElementById("searchInput").value; const resultsDiv = document.getElementById("results"); // Clear existing results resultsDiv.innerHTML = ""; // Add sample video results const videos = [ { title: "Video 1", thumbnail: "https://via.placeholder.com/200x120?text=Video+1", }, { title: "Video 2", thumbnail: "https://via.placeholder.com/200x120?text=Video+2", }, ]; videos.forEach((video) => { const videoResultDiv = document.createElement("div"); videoResultDiv.classList.add("video-result"); const videoTitle = document.createElement("div"); videoTitle.classList.add("video-title"); videoTitle.textContent = video.title; const videoThumbnail = document.createElement("div"); videoThumbnail.classList.add("video-thumbnail"); videoThumbnail.style.backgroundImage = `url(${video.thumbnail})`; videoResultDiv.appendChild(videoTitle); videoResultDiv.appendChild(videoThumbnail); resultsDiv.appendChild(videoResultDiv); }); } 
+</script>
+
+
+</head>
+
+<style> #video-search { display: flex; flex-direction: column; align-items: left; margin-top: 50px; } #searchInput { padding: 10px; font-size: 16px; width: 300px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; } button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; } #results { display: flex; flex-wrap: wrap; justify-content: left; width: 100%; } .video-result { margin: 10px; width: 300px; } .video-title { margin-bottom: 10px; font-size: 18px; } .video-thumbnail { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; } </style>
+
+<body>
+  <input type="text" id="searchInput" placeholder="Search for videos">
+  <button onclick="searchVideos()">Search</button>
+  <div id="results"></div>
+
+  <script>
+    function searchVideos() {
+      var query = document.getElementById('searchInput').value;
+      var apiKey = 'AIzaSyBmOg1B9Na7EeLNSBEx1HJrUABnRVDhitM';
+      var url = 'https://www.googleapis.com/youtube/v3/search?key=' + apiKey + '&part=snippet&type=video&q=' + encodeURIComponent(query);
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          displayResults(data.items);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function displayResults(videos) {
+      var resultsContainer = document.getElementById('results');
+      resultsContainer.innerHTML = '';
+
+      videos.forEach(video => {
+        var title = video.snippet.title;
+        var thumbnail = video.snippet.thumbnails.default.url;
+        var videoId = video.id.videoId;
+
+        var videoElement = document.createElement('div');
+        videoElement.innerHTML = `
+          <h2>${title}</h2>
+          <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+            <img src="${thumbnail}" alt="${title}">
+          </a>
+        `;
+        resultsContainer.appendChild(videoElement);
+      });
+    }
+  </script>
+</body>
+</html>
